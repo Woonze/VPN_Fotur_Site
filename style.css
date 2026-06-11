@@ -109,6 +109,10 @@ img{max-width:100%;display:block}
   color:var(--cyan);
 }
 
+.mobile-buy-link{
+  display:none;
+}
+
 .burger{
   display:none;
   border:0;
@@ -181,10 +185,10 @@ img{max-width:100%;display:block}
 
 .hero{
   position:relative;
-  min-height:calc(100vh - 82px);
+  min-height:calc(100svh - 82px);
   display:flex;
   align-items:center;
-  padding:58px 0 80px;
+  padding:18px 0 22px;
   overflow:hidden;
 }
 
@@ -215,7 +219,7 @@ img{max-width:100%;display:block}
   position:relative;
   z-index:1;
   grid-template-columns:minmax(0, 1.25fr) minmax(320px, .75fr);
-  align-items:end;
+  align-items:center;
 }
 
 .eyebrow{
@@ -240,7 +244,7 @@ img{max-width:100%;display:block}
 .hero h1,
 .headline{
   margin:0 0 24px;
-  font-size:clamp(54px, 9vw, 122px);
+  font-size:clamp(46px, 7.4vw, 112px);
   line-height:.9;
   font-weight:900;
   letter-spacing:-.09em;
@@ -267,15 +271,19 @@ img{max-width:100%;display:block}
 .hero p,
 .lead{
   max-width:760px;
-  margin:0 0 34px;
-  font-size:clamp(16px, 2vw, 21px);
-  line-height:1.75;
+  margin:0 0 24px;
+  font-size:clamp(15px, 1.6vw, 20px);
+  line-height:1.58;
 }
 
 .hero__buttons{
   display:flex;
   flex-wrap:wrap;
   gap:14px;
+}
+
+.hero-copy{
+  align-self:end;
 }
 
 .hero-panel,
@@ -317,9 +325,14 @@ img{max-width:100%;display:block}
   align-self:stretch;
 }
 
+.signal-card--compact{
+  padding:22px;
+  gap:18px;
+}
+
 .signal-card__screen{
-  min-height:230px;
-  padding:20px;
+  min-height:166px;
+  padding:18px;
   background:
     radial-gradient(circle at 50% 40%, rgba(21,223,244,.2), transparent 34%),
     linear-gradient(180deg, rgba(10,14,20,.7), rgba(5,6,8,.95));
@@ -327,7 +340,7 @@ img{max-width:100%;display:block}
 }
 
 .signal-card__screen .bars{
-  height:112px;
+  height:88px;
 }
 
 .signal-card__meta,
@@ -416,6 +429,7 @@ img{max-width:100%;display:block}
 .card.big{grid-column:span 7}
 .card.mid{grid-column:span 5}
 .card.small{grid-column:span 4}
+.card.long{grid-column:span 8}
 
 .card h3,
 .download-card h3,
@@ -485,11 +499,19 @@ img{max-width:100%;display:block}
   margin-bottom:32px;
 }
 
+.pricing--single{
+  grid-template-columns:minmax(0, 1.15fr) minmax(320px, .85fr);
+}
+
 .plan{
   padding:34px;
   min-height:540px;
   display:flex;
   flex-direction:column;
+}
+
+.plan--single{
+  min-height:unset;
 }
 
 .plan.popular{
@@ -521,6 +543,12 @@ img{max-width:100%;display:block}
   content:"■";
   color:var(--pink);
   margin-right:10px;
+}
+
+.plan-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
 }
 
 .form-panel{
@@ -674,7 +702,8 @@ textarea.field{
 
   .card.big,
   .card.mid,
-  .card.small{
+  .card.small,
+  .card.long{
     grid-column:span 1;
   }
 
@@ -709,6 +738,10 @@ textarea.field{
     display:flex;
   }
 
+  .mobile-buy-link{
+    display:inline-flex;
+  }
+
   .nav__actions{
     display:none;
   }
@@ -719,7 +752,7 @@ textarea.field{
 
   .hero{
     min-height:auto;
-    padding:38px 0 68px;
+    padding:28px 0 52px;
   }
 
   .form-grid,

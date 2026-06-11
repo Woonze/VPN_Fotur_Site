@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#040404">
-  <meta name="description" content="Тарифы FOTUR VPN и форма заявки на покупку подписки.">
+  <meta name="description" content="Единый тариф FOTUR VPN: 162 ₽ в месяц, неограниченно устройств и 120 ГБ трафика.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <title>FOTUR | Тарифы</title>
+  <title>FOTUR | Тариф</title>
 </head>
 <body data-page="tariffs">
   <div class="noise"></div>
@@ -21,13 +21,13 @@
     <button class="burger" type="button" aria-label="Открыть меню">☰</button>
     <div class="nav__links">
       <a href="index.html" data-page="index">Главная</a>
-      <a href="features.html" data-page="features">Возможности</a>
       <a href="tariffs.html" data-page="tariffs">Тарифы</a>
       <a href="download.html" data-page="download">Скачать</a>
+      <a href="index.html#bridge">Временный доступ</a>
+      <a class="mobile-buy-link" href="https://t.me/your_bot" target="_blank" rel="noreferrer">Купить</a>
     </div>
     <div class="nav__actions">
-      <a href="index.html#bridge">Временный доступ</a>
-      <a class="btn primary" href="#order">Оставить заявку</a>
+      <a class="btn primary" href="https://t.me/your_bot" target="_blank" rel="noreferrer">Купить</a>
     </div>
   </nav>
 
@@ -35,79 +35,53 @@
     <section class="section">
       <div class="container">
         <div class="section-title fade-up">
-          <div class="eyebrow">Access levels</div>
-          <h2>Выберите свой<br>уровень доступа</h2>
-          <p>Здесь тоже убрал плоскость: тарифы теперь ощущаются как витрина продукта, а не как три одинаковые колонки. Личный кабинет больше не фигурирует в преимуществах.</p>
+          <div class="eyebrow">Single tariff</div>
+          <h2>Один тариф.<br>Один понятный вход.</h2>
+          <p>Убираем лишний выбор и оставляем только то, что действительно нужно. Базовый месячный план фиксированный, а нестандартные сроки уводим в контакт или Telegram-бота.</p>
         </div>
 
-        <div class="pricing">
-          <article class="plan fade-up">
-            <small>Уровень 01</small>
-            <h3>Лайт</h3>
-            <div class="price">349 ₽</div>
+        <div class="pricing pricing--single">
+          <article class="plan plan--single popular fade-up">
+            <small>FOTUR / monthly access</small>
+            <h3>162 ₽ / месяц</h3>
+            <div class="price">120 ГБ</div>
             <ul>
-              <li>1 устройство</li>
-              <li>Быстрый старт без сложной настройки</li>
-              <li>Поддержка через основной канал</li>
+              <li>Неограниченное количество устройств</li>
+              <li>Один понятный месячный тариф</li>
+              <li>Выдача доступа без кабинета и лишней панели</li>
             </ul>
-            <button class="btn" data-plan="lite" type="button">Выбрать лайт</button>
+            <div class="plan-actions">
+              <a class="btn pink" href="https://t.me/your_bot" target="_blank" rel="noreferrer">Купить в боте</a>
+              <a class="btn ghost" href="#order">Выбрать меньше дней</a>
+            </div>
           </article>
 
-          <article class="plan popular fade-up">
-            <small>Уровень 02 / core</small>
-            <h3>Про</h3>
-            <div class="price">699 ₽</div>
-            <ul>
-              <li>До 5 устройств одновременно</li>
-              <li>Приоритетная выдача доступа</li>
-              <li>Подходит для повседневного использования</li>
-            </ul>
-            <button class="btn pink" data-plan="pro" type="button">Выбрать про</button>
-          </article>
-
-          <article class="plan fade-up">
-            <small>Уровень 03</small>
-            <h3>Элит</h3>
-            <div class="price">1199 ₽</div>
-            <ul>
-              <li>До 10 устройств</li>
-              <li>Ручная помощь с настройкой</li>
-              <li>Приоритет по нестандартным кейсам</li>
-            </ul>
-            <button class="btn" data-plan="elite" type="button">Выбрать элит</button>
+          <article class="story-card fade-up">
+            <span class="mini-label">Больше срока</span>
+            <h3>Несколько месяцев или год</h3>
+            <p>Для длинного периода не даём лишние варианты на лендинге. Вместо этого ведём человека в контакт или Telegram-бота.</p>
+            <a class="btn ghost" href="https://t.me/your_bot" target="_blank" rel="noreferrer">Связаться</a>
           </article>
         </div>
 
         <section class="form-panel form-panel--featured fade-up" id="order">
-          <div class="eyebrow">Subscription request</div>
-          <h2>Заявка на<br>подключение</h2>
-          <p class="panel-note">Форма уже готова к реальной интеграции. Сейчас она показывает безопасный ответ-заглушку, чтобы сайт работал стабильно даже без backend на GitHub Pages.</p>
-          <form data-lead-form class="form-grid">
-            <input class="field" type="text" name="contact" placeholder="Telegram или email" required>
+          <div class="eyebrow">Short period request</div>
+          <h2>Нужно меньше дней?<br>Оставь заявку</h2>
+          <p class="panel-note">На сайте оставляем только сокращённые периоды. Если нужен срок дольше месяца, лучше сразу отправлять в контакт или в бота.</p>
+          <form data-lead-form="order" class="form-grid">
+            <input class="field" type="email" name="email" placeholder="Почта для ответа" required>
             <select class="field" id="plan" name="plan" required>
-              <option value="lite">Лайт</option>
-              <option value="pro">Про</option>
-              <option value="elite">Элит</option>
+              <option value="7-days">7 дней</option>
+              <option value="14-days">14 дней</option>
+              <option value="30-days">30 дней / 162 ₽</option>
             </select>
-            <input class="field" type="text" name="device" placeholder="Устройство: Windows, iPhone, Android">
-            <input class="field" type="text" name="promo" placeholder="Промокод или источник">
-            <textarea class="field full" name="message" placeholder="Если нужен особый сценарий подключения, напиши его здесь"></textarea>
+            <textarea class="field full" name="message" placeholder="Если нужен индивидуальный сценарий подключения, напиши его здесь"></textarea>
             <div class="form-actions">
               <button class="btn primary" type="submit">Отправить заявку</button>
               <div class="status" data-status></div>
             </div>
           </form>
         </section>
-
-        <div class="cta-band fade-up">
-          <div>
-            <div class="eyebrow">Bridge option</div>
-            <h2 class="headline">Telegram не открывается?</h2>
-            <p class="lead">Тогда не теряй пользователя на оплате: сначала дай ему временный доступ через форму на главной, а уже потом веди к полноценной подписке.</p>
-            <a class="btn ghost" href="index.html#bridge">Открыть форму временного доступа</a>
-          </div>
-          <div class="brand-mark">PROTO</div>
-        </div>
       </div>
     </section>
   </main>
@@ -120,9 +94,9 @@
       </div>
       <div class="footer-nav">
         <a href="index.html">Главная</a>
-        <a href="features.html">Возможности</a>
         <a href="download.html">Скачать</a>
         <a href="index.html#bridge">Временный доступ</a>
+        <a href="https://t.me/your_bot" target="_blank" rel="noreferrer">Купить</a>
       </div>
     </div>
   </footer>
