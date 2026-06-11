@@ -688,26 +688,61 @@ textarea.field{
   margin-top:auto;
 }
 
-.cta-band{
-  grid-template-columns:1.1fr .9fr;
-  align-items:center;
-  padding:28px 0 10px;
+.brand-plaque{
+  position:relative;
+  overflow:hidden;
+  margin-top:28px;
+  padding:34px 30px 28px;
+  border-top:1px solid rgba(255,87,210,.34);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)),
+    rgba(10,12,16,.88);
 }
 
-.brand-mark{
-  font-size:clamp(72px, 17vw, 220px);
-  line-height:.78;
-  letter-spacing:-.08em;
-  font-weight:900;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(255,255,255,.12);
-  text-shadow:
-    0 0 32px rgba(104,243,255,.06),
-    0 0 72px rgba(255,87,210,.04);
-  opacity:.22;
-  text-align:right;
-  text-transform:uppercase;
+.brand-plaque::before{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:1px;
+  background:linear-gradient(90deg, rgba(21,223,244,.55), rgba(255,87,210,.2), transparent 70%);
+}
+
+.brand-plaque__copy{
   position:relative;
+  z-index:2;
+  max-width:760px;
+}
+
+.brand-plaque__title{
+  margin:0 0 18px;
+  font-size:clamp(36px, 5vw, 76px);
+  line-height:.94;
+  letter-spacing:-.08em;
+  text-transform:uppercase;
+}
+
+.brand-plaque__text{
+  max-width:720px;
+  margin:0 0 24px;
+  color:var(--muted);
+  line-height:1.72;
+  font-size:14px;
+}
+
+.brand-plaque__word{
+  position:absolute;
+  right:-8px;
+  bottom:-26px;
+  z-index:1;
+  font-size:clamp(90px, 19vw, 260px);
+  line-height:.8;
+  letter-spacing:-.1em;
+  font-weight:900;
+  color:rgba(255,255,255,.04);
+  text-transform:uppercase;
+  pointer-events:none;
+  user-select:none;
 }
 
 .footer{
@@ -751,7 +786,6 @@ textarea.field{
 
 @media (max-width:980px){
   .hero__grid,
-  .cta-band,
   .story-grid,
   .pricing,
   .download-grid{
@@ -769,8 +803,9 @@ textarea.field{
     grid-column:span 1;
   }
 
-  .brand-mark{
-    text-align:left;
+  .brand-plaque__word{
+    right:auto;
+    left:0;
   }
 }
 
