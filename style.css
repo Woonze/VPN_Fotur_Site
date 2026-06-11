@@ -232,7 +232,7 @@ img{max-width:100%;display:block}
 .hero__grid{
   position:relative;
   z-index:1;
-  grid-template-columns:minmax(0, 1.25fr) minmax(320px, .75fr);
+  grid-template-columns:minmax(0, 1.16fr) minmax(380px, .84fr);
   align-items:center;
 }
 
