@@ -1,7 +1,7 @@
 const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
 
-const ALLOWED_EMAIL_DOMAINS = new Set(["google.com", "mail.ru", "yandex.ru"]);
+const ALLOWED_EMAIL_DOMAINS = new Set(["gmail.com", "googlemail.com", "mail.ru", "yandex.ru"]);
 const FREE_ACCESS_STORAGE_KEY = "fotur-free-access-issued";
 const FOTUR_API_BASE_URL =
   window.FOTUR_API_BASE_URL ||
