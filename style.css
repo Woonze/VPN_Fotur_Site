@@ -676,8 +676,15 @@ textarea.field{
 }
 
 .field.full,
+.turnstile-box,
 .form-actions{
   grid-column:1 / -1;
+}
+
+.turnstile-box{
+  min-height:65px;
+  display:flex;
+  align-items:center;
 }
 
 .form-actions{

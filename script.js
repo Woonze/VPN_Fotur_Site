@@ -7,6 +7,10 @@ const FOTUR_API_BASE_URL =
   window.FOTUR_API_BASE_URL ||
   document.body.dataset.apiBaseUrl ||
   "https://pay.fotur.tech/site-api";
+const FOTUR_TURNSTILE_SITE_KEY =
+  window.FOTUR_TURNSTILE_SITE_KEY ||
+  document.body.dataset.turnstileSiteKey ||
+  "0x4AAAAAADi1pA4R-Q9Hpk5D";
 
 const burger = $(".burger");
 const links = $(".nav__links");
@@ -56,6 +60,44 @@ const savedPlan = localStorage.getItem("foturPlan");
 if (savedPlan && $("#plan")) {
   $("#plan").value = savedPlan;
 }
+
+function renderTurnstileWidgets() {
+  if (!window.turnstile || !FOTUR_TURNSTILE_SITE_KEY) {
+    return;
+  }
+
+  $$("[data-turnstile]").forEach((container) => {
+    if (container.dataset.turnstileWidgetId) {
+      return;
+    }
+    const widgetId = window.turnstile.render(container, {
+      sitekey: FOTUR_TURNSTILE_SITE_KEY,
+      theme: "dark",
+      size: "normal",
+    });
+    container.dataset.turnstileWidgetId = widgetId;
+  });
+}
+
+function getTurnstileToken(form) {
+  const container = form.querySelector("[data-turnstile]");
+  const widgetId = container?.dataset.turnstileWidgetId;
+  if (!window.turnstile || !widgetId) {
+    return "";
+  }
+  return window.turnstile.getResponse(widgetId) || "";
+}
+
+function resetTurnstile(form) {
+  const container = form.querySelector("[data-turnstile]");
+  const widgetId = container?.dataset.turnstileWidgetId;
+  if (window.turnstile && widgetId) {
+    window.turnstile.reset(widgetId);
+  }
+}
+
+window.addEventListener("fotur:turnstile-ready", renderTurnstileWidgets);
+renderTurnstileWidgets();
 
 function validateEmailDomain(email) {
   const domain = email.trim().toLowerCase().split("@")[1];
@@ -179,6 +221,13 @@ async function handleBridgeForm(form) {
 
     if (stage === "request") {
       status.textContent = "Проверяем почту и отправляем код...";
+      renderTurnstileWidgets();
+      const turnstileToken = getTurnstileToken(form);
+      if (!turnstileToken) {
+        status.textContent = "Подтвердите, что вы не робот, и попробуйте еще раз.";
+        submitButton.disabled = false;
+        return;
+      }
       const profile = await collectClientProfile();
       const response = await fetch(`${FOTUR_API_BASE_URL}/api/v1/public/temporary-access/request`, {
         method: "POST",
@@ -188,6 +237,7 @@ async function handleBridgeForm(form) {
           source: "temporary-access",
           profile,
           honeypot,
+          turnstile_token: turnstileToken,
           utm: {
             page: location.pathname,
             ref: document.referrer || "",
@@ -195,6 +245,7 @@ async function handleBridgeForm(form) {
         }),
       });
       const data = await response.json();
+      resetTurnstile(form);
       if (!response.ok || !data.ok) {
         status.textContent = data.message || "Не удалось отправить код. Попробуйте еще раз.";
         submitButton.disabled = false;
@@ -238,6 +289,7 @@ async function handleBridgeForm(form) {
       submitButton.disabled = false;
     }
   } catch (error) {
+    resetTurnstile(form);
     status.textContent = "Не удалось обработать запрос. Попробуйте еще раз.";
     submitButton.disabled = false;
   }
