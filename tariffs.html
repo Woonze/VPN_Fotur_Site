@@ -23,11 +23,12 @@
       <a href="index.html" data-page="index">Главная</a>
       <a href="tariffs.html" data-page="tariffs">Тарифы</a>
       <a href="download.html" data-page="download">Скачать</a>
-      <a href="index.html#bridge">Временный доступ</a>
-      <a class="mobile-buy-link" href="https://t.me/your_bot" target="_blank" rel="noreferrer">Купить</a>
+      <a class="mobile-buy-link" href="https://t.me/foturvpnbot" target="_blank" rel="noreferrer">Купить</a>
+      <a class="mobile-temp-link" href="#bridge">Временный доступ</a>
     </div>
     <div class="nav__actions">
-      <a class="btn primary" href="https://t.me/your_bot" target="_blank" rel="noreferrer">Купить</a>
+      <a class="btn ghost btn-nav" href="#bridge">Временный доступ</a>
+      <a class="btn primary" href="https://t.me/foturvpnbot" target="_blank" rel="noreferrer">Купить</a>
     </div>
   </nav>
 
@@ -51,8 +52,8 @@
               <li>Выдача доступа без кабинета и лишней панели</li>
             </ul>
             <div class="plan-actions">
-              <a class="btn pink" href="https://t.me/your_bot" target="_blank" rel="noreferrer">Купить в боте</a>
-              <a class="btn ghost" href="#order">Выбрать меньше дней</a>
+              <a class="btn pink" href="https://t.me/foturvpnbot" target="_blank" rel="noreferrer">Купить в боте</a>
+              <a class="btn ghost" href="https://t.me/foturvpnbot" target="_blank" rel="noreferrer">Выбрать меньше дней</a>
             </div>
           </article>
 
@@ -60,24 +61,18 @@
             <span class="mini-label">Больше срока</span>
             <h3>Несколько месяцев или год</h3>
             <p>Для длинного периода не даём лишние варианты на лендинге. Вместо этого ведём человека в контакт или Telegram-бота.</p>
-            <a class="btn ghost" href="https://t.me/your_bot" target="_blank" rel="noreferrer">Связаться</a>
+            <a class="btn ghost" href="https://t.me/foturvpnbot" target="_blank" rel="noreferrer">Связаться</a>
           </article>
         </div>
 
-        <section class="form-panel form-panel--featured fade-up" id="order">
-          <div class="eyebrow">Short period request</div>
-          <h2>Нужно меньше дней?<br>Оставь заявку</h2>
-          <p class="panel-note">На сайте оставляем только сокращённые периоды. Если нужен срок дольше месяца, лучше сразу отправлять в контакт или в бота.</p>
-          <form data-lead-form="order" class="form-grid">
-            <input class="field" type="email" name="email" placeholder="Почта для ответа" required>
-            <select class="field" id="plan" name="plan" required>
-              <option value="7-days">7 дней</option>
-              <option value="14-days">14 дней</option>
-              <option value="30-days">30 дней / 162 ₽</option>
-            </select>
-            <textarea class="field full" name="message" placeholder="Если нужен индивидуальный сценарий подключения, напиши его здесь"></textarea>
+        <section class="form-panel form-panel--featured fade-up" id="bridge">
+          <div class="eyebrow">Fallback access</div>
+          <h2>Нет доступа к Telegram?<br>Ссылка выдаётся моментально</h2>
+          <p class="panel-note">Если бот сейчас не открывается, оставь почту и получи временный доступ сразу, без ожидания. Разрешены только `google.com`, `mail.ru` и `yandex.ru`.</p>
+          <form data-lead-form="bridge" class="form-grid">
+            <input class="field full" type="email" name="email" placeholder="Почта для мгновенной ссылки" required>
             <div class="form-actions">
-              <button class="btn primary" type="submit">Отправить заявку</button>
+              <button class="btn pink" type="submit">Получить</button>
               <div class="status" data-status></div>
             </div>
           </form>
@@ -96,7 +91,7 @@
         <a href="index.html">Главная</a>
         <a href="download.html">Скачать</a>
         <a href="index.html#bridge">Временный доступ</a>
-        <a href="https://t.me/your_bot" target="_blank" rel="noreferrer">Купить</a>
+        <a href="https://t.me/foturvpnbot" target="_blank" rel="noreferrer">Купить</a>
       </div>
     </div>
   </footer>

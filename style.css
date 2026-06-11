@@ -113,6 +113,10 @@ img{max-width:100%;display:block}
   display:none;
 }
 
+.mobile-temp-link{
+  display:none;
+}
+
 .burger{
   display:none;
   border:0;
@@ -150,6 +154,11 @@ img{max-width:100%;display:block}
   color:#03161a;
 }
 
+.btn.primary:hover{
+  background:linear-gradient(135deg, #86f8ff 0%, #d4ffff 100%);
+  color:#03161a;
+}
+
 .btn.pink{
   background:linear-gradient(135deg, var(--pink-strong) 0%, #ff82e3 100%);
   border-color:transparent;
@@ -159,6 +168,10 @@ img{max-width:100%;display:block}
 
 .btn.ghost{
   background:transparent;
+}
+
+.btn-nav{
+  white-space:nowrap;
 }
 
 .page{
@@ -343,6 +356,47 @@ img{max-width:100%;display:block}
   height:88px;
 }
 
+.signal-graph{
+  position:relative;
+  height:100%;
+  min-height:126px;
+  overflow:hidden;
+}
+
+.signal-graph svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.signal-graph__glow{
+  position:absolute;
+  inset:18% 18% 24%;
+  background:radial-gradient(circle, rgba(104,243,255,.32), transparent 58%);
+  filter:blur(24px);
+  opacity:.95;
+}
+
+.signal-graph__line{
+  fill:none;
+  stroke:url(#foturGraphStroke);
+  stroke-width:6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 16px rgba(104,243,255,.24));
+}
+
+.signal-graph__area{
+  fill:url(#foturGraphFill);
+}
+
+.signal-graph__points circle{
+  fill:#8cf8ff;
+  stroke:#0c1217;
+  stroke-width:2;
+  filter:drop-shadow(0 0 10px rgba(104,243,255,.4));
+}
+
 .signal-card__meta,
 .metric-grid{
   grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -398,7 +452,7 @@ img{max-width:100%;display:block}
 .section-title h2{
   margin:0;
   font-size:clamp(36px, 6vw, 78px);
-  line-height:.94;
+  line-height:1.04;
   letter-spacing:-.08em;
   text-transform:uppercase;
 }
@@ -642,10 +696,18 @@ textarea.field{
 
 .brand-mark{
   font-size:clamp(72px, 17vw, 220px);
-  line-height:.8;
-  letter-spacing:-.12em;
-  opacity:.12;
+  line-height:.78;
+  letter-spacing:-.08em;
+  font-weight:900;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.12);
+  text-shadow:
+    0 0 32px rgba(104,243,255,.06),
+    0 0 72px rgba(255,87,210,.04);
+  opacity:.22;
   text-align:right;
+  text-transform:uppercase;
+  position:relative;
 }
 
 .footer{
@@ -739,6 +801,10 @@ textarea.field{
   }
 
   .mobile-buy-link{
+    display:inline-flex;
+  }
+
+  .mobile-temp-link{
     display:inline-flex;
   }
 

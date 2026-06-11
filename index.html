@@ -23,10 +23,11 @@
       <a href="index.html" data-page="index">Главная</a>
       <a href="tariffs.html" data-page="tariffs">Тарифы</a>
       <a href="download.html" data-page="download">Скачать</a>
-      <a href="#bridge">Временный доступ</a>
       <a class="mobile-buy-link" href="https://t.me/foturvpnbot" target="_blank" rel="noreferrer">Купить</a>
+      <a class="mobile-temp-link" href="#bridge">Временный доступ</a>
     </div>
     <div class="nav__actions">
+      <a class="btn ghost btn-nav" href="#bridge">Временный доступ</a>
       <a class="btn primary" href="https://t.me/foturvpnbot" target="_blank" rel="noreferrer">Купить</a>
     </div>
   </nav>
@@ -51,13 +52,31 @@
             <p class="panel-note">Если Telegram недоступен, пользователь не ждёт. Он оставляет почту здесь и получает ссылку моментально, без ручной проверки и без очереди.</p>
           </div>
           <div class="signal-card__screen">
-            <div class="bars">
-              <i style="height:28%"></i>
-              <i style="height:44%"></i>
-              <i style="height:39%"></i>
-              <i style="height:74%"></i>
-              <i style="height:52%"></i>
-              <i style="height:88%"></i>
+            <div class="signal-graph" aria-hidden="true">
+              <div class="signal-graph__glow"></div>
+              <svg viewBox="0 0 520 160" preserveAspectRatio="none" role="presentation">
+                <defs>
+                  <linearGradient id="foturGraphStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#77f6ff"></stop>
+                    <stop offset="55%" stop-color="#52e4ff"></stop>
+                    <stop offset="100%" stop-color="#ff67d6"></stop>
+                  </linearGradient>
+                  <linearGradient id="foturGraphFill" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="rgba(119,246,255,0.45)"></stop>
+                    <stop offset="100%" stop-color="rgba(119,246,255,0)"></stop>
+                  </linearGradient>
+                </defs>
+                <path class="signal-graph__area" d="M0,120 C40,118 64,116 92,110 C128,101 150,92 184,94 C224,96 244,114 276,105 C312,95 336,54 362,62 C392,72 414,120 450,102 C480,86 498,64 520,36 L520,160 L0,160 Z"></path>
+                <path class="signal-graph__line" d="M0,120 C40,118 64,116 92,110 C128,101 150,92 184,94 C224,96 244,114 276,105 C312,95 336,54 362,62 C392,72 414,120 450,102 C480,86 498,64 520,36"></path>
+                <g class="signal-graph__points">
+                  <circle cx="92" cy="110" r="4"></circle>
+                  <circle cx="184" cy="94" r="4"></circle>
+                  <circle cx="276" cy="105" r="4"></circle>
+                  <circle cx="362" cy="62" r="4"></circle>
+                  <circle cx="450" cy="102" r="4"></circle>
+                  <circle cx="520" cy="36" r="5"></circle>
+                </g>
+              </svg>
             </div>
           </div>
           <div class="metric-grid">
