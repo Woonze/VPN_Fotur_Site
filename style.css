@@ -212,7 +212,7 @@ img{max-width:100%;display:block}
   background:
     linear-gradient(180deg, rgba(4,4,4,.16), rgba(4,4,4,.8)),
     linear-gradient(90deg, rgba(2,10,18,.78), rgba(4,4,4,.38) 42%, rgba(24,3,18,.44)),
-    url('assets/hero-network.png') center/cover;
+    url('/assets/hero-network.png') center/cover;
   opacity:.58;
   filter:saturate(1.02) contrast(1.06);
 }

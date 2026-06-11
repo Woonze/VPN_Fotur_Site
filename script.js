@@ -48,7 +48,7 @@ $$("[data-plan]").forEach((button) => {
       document.querySelector("#order")?.scrollIntoView({ behavior: "smooth", block: "start" });
       return;
     }
-    location.href = "tariffs.html#order";
+    location.href = "/tariffs/#order";
   });
 });
 
