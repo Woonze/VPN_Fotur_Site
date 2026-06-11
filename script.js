@@ -3,7 +3,10 @@ const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector
 
 const ALLOWED_EMAIL_DOMAINS = new Set(["google.com", "mail.ru", "yandex.ru"]);
 const FREE_ACCESS_STORAGE_KEY = "fotur-free-access-issued";
-const FOTUR_API_BASE_URL = window.FOTUR_API_BASE_URL || "https://api.fotur.tech";
+const FOTUR_API_BASE_URL =
+  window.FOTUR_API_BASE_URL ||
+  document.body.dataset.apiBaseUrl ||
+  "https://pay.fotur.tech/site-api";
 
 const burger = $(".burger");
 const links = $(".nav__links");
