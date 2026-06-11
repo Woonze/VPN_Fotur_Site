@@ -3,6 +3,7 @@ const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector
 
 const ALLOWED_EMAIL_DOMAINS = new Set(["google.com", "mail.ru", "yandex.ru"]);
 const FREE_ACCESS_STORAGE_KEY = "fotur-free-access-issued";
+const FOTUR_API_BASE_URL = window.FOTUR_API_BASE_URL || "https://api.fotur.tech";
 
 const burger = $(".burger");
 const links = $(".nav__links");
@@ -141,56 +142,101 @@ async function collectClientProfile() {
   return profile;
 }
 
+function resetBridgeForm(form) {
+  form.dataset.stage = "request";
+  form.dataset.requestToken = "";
+  form.querySelector("[data-code-wrap]")?.setAttribute("hidden", "hidden");
+  const submitButton = form.querySelector('button[type="submit"]');
+  if (submitButton) {
+    submitButton.textContent = "Получить код";
+    submitButton.disabled = false;
+  }
+}
+
 async function handleBridgeForm(form) {
   const status = form.querySelector("[data-status]");
+  const submitButton = form.querySelector('button[type="submit"]');
   const email = form.elements.email.value.trim().toLowerCase();
+  const codeInput = form.elements.code;
+  const honeypot = form.elements.company?.value || "";
+  const stage = form.dataset.stage || "request";
 
   if (!validateEmailDomain(email)) {
     status.textContent = "Попробуйте другую почту.";
     return;
   }
 
-  if (localStorage.getItem(FREE_ACCESS_STORAGE_KEY)) {
+  if (stage === "request" && localStorage.getItem(FREE_ACCESS_STORAGE_KEY)) {
     status.textContent = "Для этого браузера временный доступ уже выдавался.";
     return;
   }
 
-  status.textContent = "Проверяем почту и подготавливаем выдачу...";
-
-  const profile = await collectClientProfile();
-  const issueKey = await sha256(`${email}:${profile.fingerprint}`);
-
-  if (localStorage.getItem(issueKey)) {
-    status.textContent = "Для этой почты и устройства доступ уже выдавался.";
-    return;
-  }
-
-  const payload = {
-    email,
-    source: "temporary-access",
-    issuedInstantly: true,
-    profile,
-  };
-
   try {
-    // Для реального запуска лучше принимать IP на backend и там же жестко
-    // блокировать повторные выдачи по fingerprint/email/IP.
-    const API_URL = "https://api.example.com/fotur/free-access";
-    void API_URL;
-    // await fetch(API_URL, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // });
-    console.debug(payload);
-    await new Promise((resolve) => setTimeout(resolve, 650));
+    submitButton.disabled = true;
 
-    localStorage.setItem(FREE_ACCESS_STORAGE_KEY, "1");
-    localStorage.setItem(issueKey, JSON.stringify({ email, fingerprint: profile.fingerprint }));
-    status.textContent = "Запрос принят. Автоматическая выдача ссылки будет подключена следующим этапом.";
-    form.reset();
+    if (stage === "request") {
+      status.textContent = "Проверяем почту и отправляем код...";
+      const profile = await collectClientProfile();
+      const response = await fetch(`${FOTUR_API_BASE_URL}/api/v1/public/temporary-access/request`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          source: "temporary-access",
+          profile,
+          honeypot,
+          utm: {
+            page: location.pathname,
+            ref: document.referrer || "",
+          },
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.ok) {
+        status.textContent = data.message || "Не удалось отправить код. Попробуйте еще раз.";
+        submitButton.disabled = false;
+        return;
+      }
+
+      form.dataset.stage = "verify";
+      form.dataset.requestToken = data.request_token || "";
+      form.querySelector("[data-code-wrap]")?.removeAttribute("hidden");
+      codeInput.value = "";
+      codeInput.focus();
+      submitButton.textContent = "Подтвердить";
+      submitButton.disabled = false;
+      status.textContent = "Код отправлен на почту. Введите его ниже.";
+      return;
+    }
+
+    if (!form.dataset.requestToken) {
+      resetBridgeForm(form);
+      status.textContent = "Сессия подтверждения истекла. Запросите новый код.";
+      return;
+    }
+
+    status.textContent = "Проверяем код и оформляем доступ...";
+    const response = await fetch(`${FOTUR_API_BASE_URL}/api/v1/public/temporary-access/verify`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        request_token: form.dataset.requestToken,
+        code: codeInput.value.trim(),
+      }),
+    });
+    const data = await response.json();
+    status.textContent = data.message || "Не удалось обработать код.";
+
+    if (response.ok && data.ok) {
+      localStorage.setItem(FREE_ACCESS_STORAGE_KEY, "1");
+      form.reset();
+      resetBridgeForm(form);
+    } else {
+      submitButton.disabled = false;
+    }
   } catch (error) {
     status.textContent = "Не удалось обработать запрос. Попробуйте еще раз.";
+    submitButton.disabled = false;
   }
 }
 
@@ -198,28 +244,27 @@ async function handleOrderForm(form) {
   const status = form.querySelector("[data-status]");
   const payload = Object.fromEntries(new FormData(form).entries());
 
-  status.textContent = "Отправляем заявку...";
+  status.textContent = "РћС‚РїСЂР°РІР»СЏРµРј Р·Р°СЏРІРєСѓ...";
 
   try {
     const API_URL = "https://api.example.com/fotur/orders";
     void API_URL;
-    // await fetch(API_URL, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // });
     await new Promise((resolve) => setTimeout(resolve, 650));
-    status.textContent = `Заявка принята. Период: ${payload.plan}.`;
+    status.textContent = `Р—Р°СЏРІРєР° РїСЂРёРЅСЏС‚Р°. РџРµСЂРёРѕРґ: ${payload.plan}.`;
     form.reset();
     if ($("#plan") && savedPlan) {
       $("#plan").value = savedPlan;
     }
   } catch (error) {
-    status.textContent = "Не удалось отправить заявку. Попробуйте еще раз.";
+    status.textContent = "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РїСЂР°РІРёС‚СЊ Р·Р°СЏРІРєСѓ. РџРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰Рµ СЂР°Р·.";
   }
 }
 
 $$("[data-lead-form]").forEach((form) => {
+  if (form.dataset.leadForm === "bridge") {
+    resetBridgeForm(form);
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const type = form.dataset.leadForm;

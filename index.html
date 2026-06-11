@@ -143,10 +143,14 @@
           <div class="eyebrow">Fallback access</div>
           <h2>Нет доступа к Telegram?<br>Ссылка выдается моментально</h2>
           <p class="panel-note">Оставьте почту и получите временный доступ сразу, без ожидания. Подходят только адреса на `google.com`, `mail.ru` и `yandex.ru`. Если адрес не подходит, форма подскажет попробовать другую почту</p>
-          <form data-lead-form="bridge" class="form-grid">
+          <form data-lead-form="bridge" class="form-grid" data-stage="request">
             <input class="field full" type="email" name="email" placeholder="Почта для мгновенной ссылки" required>
+            <div class="full" data-code-wrap hidden>
+              <input class="field full" type="text" name="code" placeholder="Код из письма" inputmode="numeric" autocomplete="one-time-code">
+            </div>
+            <input type="text" name="company" tabindex="-1" autocomplete="off" hidden aria-hidden="true">
             <div class="form-actions">
-              <button class="btn pink" type="submit">Получить</button>
+              <button class="btn pink" type="submit">Получить код</button>
               <div class="status" data-status></div>
             </div>
           </form>
