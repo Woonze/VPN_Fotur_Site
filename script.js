@@ -155,7 +155,7 @@ async function handleBridgeForm(form) {
     return;
   }
 
-  status.textContent = "Проверяем почту и собираем защитный отпечаток...";
+  status.textContent = "Проверяем почту и подготавливаем выдачу...";
 
   const profile = await collectClientProfile();
   const issueKey = await sha256(`${email}:${profile.fingerprint}`);
@@ -173,7 +173,7 @@ async function handleBridgeForm(form) {
   };
 
   try {
-    // Для реального запуска лучше принимать IP на backend и там же жёстко
+    // Для реального запуска лучше принимать IP на backend и там же жестко
     // блокировать повторные выдачи по fingerprint/email/IP.
     const API_URL = "https://api.example.com/fotur/free-access";
     void API_URL;
@@ -187,10 +187,10 @@ async function handleBridgeForm(form) {
 
     localStorage.setItem(FREE_ACCESS_STORAGE_KEY, "1");
     localStorage.setItem(issueKey, JSON.stringify({ email, fingerprint: profile.fingerprint }));
-    status.textContent = "Ссылка подготовлена моментально. Подключите backend в script.js, чтобы отдавать её автоматически.";
+    status.textContent = "Запрос принят. Автоматическая выдача ссылки будет подключена следующим этапом.";
     form.reset();
   } catch (error) {
-    status.textContent = "Не удалось выдать ссылку. Проверь backend и попробуй ещё раз.";
+    status.textContent = "Не удалось обработать запрос. Попробуйте еще раз.";
   }
 }
 
@@ -198,7 +198,7 @@ async function handleOrderForm(form) {
   const status = form.querySelector("[data-status]");
   const payload = Object.fromEntries(new FormData(form).entries());
 
-  status.textContent = "Отправляем заявку на выбранный срок...";
+  status.textContent = "Отправляем заявку...";
 
   try {
     const API_URL = "https://api.example.com/fotur/orders";
@@ -209,13 +209,13 @@ async function handleOrderForm(form) {
     //   body: JSON.stringify(payload),
     // });
     await new Promise((resolve) => setTimeout(resolve, 650));
-    status.textContent = `Заявка принята. Период: ${payload.plan}. Подключи реальный API в script.js, чтобы форма стала боевой.`;
+    status.textContent = `Заявка принята. Период: ${payload.plan}.`;
     form.reset();
     if ($("#plan") && savedPlan) {
       $("#plan").value = savedPlan;
     }
   } catch (error) {
-    status.textContent = "Не удалось отправить заявку. Проверь endpoint, CORS и backend.";
+    status.textContent = "Не удалось отправить заявку. Попробуйте еще раз.";
   }
 }
 
