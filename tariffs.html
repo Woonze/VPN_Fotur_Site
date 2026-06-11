@@ -1,1 +1,132 @@
-<!doctype html><html lang="ru" class="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#050505"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><title>FOTUR VPN</title><meta name="description" content="FOTUR VPN — неоновый бруталистский интерфейс приватного сетевого доступа."></head><body><div class="noise"></div><div class="scan"></div><nav class="nav"><a class="brand" href="index.html">FOTUR</a><button class="burger">☰</button><div class="nav__links"><a href="index.html" data-page="index">Главная</a><a href="features.html" data-page="features">Возможности</a><a href="tariffs.html" data-page="tariffs">Тарифы</a><a href="download.html" data-page="download">Скачать</a><a href="dashboard.html" data-page="dashboard">Кабинет</a></div><div class="nav__actions"><a href="dashboard.html">Войти</a><a class="btn primary" href="tariffs.html#order">Регистрация</a></div></nav><main class="page"><section class="container"><div class="section-title fade-up"><div class="eyebrow">ACCESS LEVELS</div><h2>Выберите свой<br>уровень доступа</h2><p>Заменил декоративный PROTO_G на FOTUR и оставил брутальную сетку тарифов. Цены и пункты легко поменять.</p></div><div class="grid pricing fade-up"><article class="plan"><small>Уровень 01</small><h3>Лайт</h3><div class="price">299₽</div><ul><li>1 устройство</li><li>Базовый доступ</li><li>Поддержка в Telegram</li></ul><button class="btn" data-plan="lite">Инициация</button></article><article class="plan popular"><small>Уровень 02 · popular</small><h3>Про</h3><div class="price">599₽</div><ul><li>5 устройств</li><li>Приоритетная выдача</li><li>Быстрое подключение</li><li>Личный кабинет</li></ul><button class="btn pink" data-plan="pro">Установить связь</button></article><article class="plan"><small>Уровень 03</small><h3>Элит</h3><div class="price">999₽</div><ul><li>10 устройств</li><li>Расширенный доступ</li><li>VIP-поддержка</li><li>Персональная настройка</li></ul><button class="btn" data-plan="elite">Полный доступ</button></article></div><section id="order" class="form-panel fade-up"><h2>Заявка на подключение</h2><p class="lead" style="margin-left:0">Форма готова под твой API. Сейчас стоит безопасная заглушка, чтобы сайт не ломался на GitHub Pages.</p><form id="orderForm" class="form-grid"><input class="field" name="contact" placeholder="Telegram или email" required><select class="field" id="plan" name="plan"><option value="lite">Лайт</option><option value="pro">Про</option><option value="elite">Элит</option></select><button class="btn primary" type="submit">Отправить</button></form><div id="formStatus" class="status"></div></section><div style="height:220px;display:grid;align-items:end;overflow:hidden"><p style="font-size:clamp(70px,18vw,210px);line-height:.75;margin:0;color:#1f1f1f;font-weight:900;letter-spacing:-.12em">FOTUR</p></div></section></main><footer class="footer"><div class="container"><div><div class="brand">FOTUR</div><p>© 2026 FOTUR. Neon Monolith Interface.</p></div><div><a href="tariffs.html">Тарифы</a><a href="download.html">Скачать</a><a href="dashboard.html">Кабинет</a><a href="#">Статус</a></div></div></footer><script>document.querySelectorAll('[data-page]').forEach(a=>{if(location.pathname.endsWith(a.getAttribute('href')))a.classList.add('active')}); if(location.pathname.endsWith('/')||location.pathname.endsWith('index.html')){document.querySelector('[data-page="index"]')?.classList.add('active')}</script><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#040404">
+  <meta name="description" content="Тарифы FOTUR VPN и форма заявки на покупку подписки.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>FOTUR | Тарифы</title>
+</head>
+<body data-page="tariffs">
+  <div class="noise"></div>
+  <div class="scan"></div>
+
+  <nav class="nav">
+    <a class="brand" href="index.html">FOTUR</a>
+    <button class="burger" type="button" aria-label="Открыть меню">☰</button>
+    <div class="nav__links">
+      <a href="index.html" data-page="index">Главная</a>
+      <a href="features.html" data-page="features">Возможности</a>
+      <a href="tariffs.html" data-page="tariffs">Тарифы</a>
+      <a href="download.html" data-page="download">Скачать</a>
+    </div>
+    <div class="nav__actions">
+      <a href="index.html#bridge">Временный доступ</a>
+      <a class="btn primary" href="#order">Оставить заявку</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="section">
+      <div class="container">
+        <div class="section-title fade-up">
+          <div class="eyebrow">Access levels</div>
+          <h2>Выберите свой<br>уровень доступа</h2>
+          <p>Здесь тоже убрал плоскость: тарифы теперь ощущаются как витрина продукта, а не как три одинаковые колонки. Личный кабинет больше не фигурирует в преимуществах.</p>
+        </div>
+
+        <div class="pricing">
+          <article class="plan fade-up">
+            <small>Уровень 01</small>
+            <h3>Лайт</h3>
+            <div class="price">349 ₽</div>
+            <ul>
+              <li>1 устройство</li>
+              <li>Быстрый старт без сложной настройки</li>
+              <li>Поддержка через основной канал</li>
+            </ul>
+            <button class="btn" data-plan="lite" type="button">Выбрать лайт</button>
+          </article>
+
+          <article class="plan popular fade-up">
+            <small>Уровень 02 / core</small>
+            <h3>Про</h3>
+            <div class="price">699 ₽</div>
+            <ul>
+              <li>До 5 устройств одновременно</li>
+              <li>Приоритетная выдача доступа</li>
+              <li>Подходит для повседневного использования</li>
+            </ul>
+            <button class="btn pink" data-plan="pro" type="button">Выбрать про</button>
+          </article>
+
+          <article class="plan fade-up">
+            <small>Уровень 03</small>
+            <h3>Элит</h3>
+            <div class="price">1199 ₽</div>
+            <ul>
+              <li>До 10 устройств</li>
+              <li>Ручная помощь с настройкой</li>
+              <li>Приоритет по нестандартным кейсам</li>
+            </ul>
+            <button class="btn" data-plan="elite" type="button">Выбрать элит</button>
+          </article>
+        </div>
+
+        <section class="form-panel form-panel--featured fade-up" id="order">
+          <div class="eyebrow">Subscription request</div>
+          <h2>Заявка на<br>подключение</h2>
+          <p class="panel-note">Форма уже готова к реальной интеграции. Сейчас она показывает безопасный ответ-заглушку, чтобы сайт работал стабильно даже без backend на GitHub Pages.</p>
+          <form data-lead-form class="form-grid">
+            <input class="field" type="text" name="contact" placeholder="Telegram или email" required>
+            <select class="field" id="plan" name="plan" required>
+              <option value="lite">Лайт</option>
+              <option value="pro">Про</option>
+              <option value="elite">Элит</option>
+            </select>
+            <input class="field" type="text" name="device" placeholder="Устройство: Windows, iPhone, Android">
+            <input class="field" type="text" name="promo" placeholder="Промокод или источник">
+            <textarea class="field full" name="message" placeholder="Если нужен особый сценарий подключения, напиши его здесь"></textarea>
+            <div class="form-actions">
+              <button class="btn primary" type="submit">Отправить заявку</button>
+              <div class="status" data-status></div>
+            </div>
+          </form>
+        </section>
+
+        <div class="cta-band fade-up">
+          <div>
+            <div class="eyebrow">Bridge option</div>
+            <h2 class="headline">Telegram не открывается?</h2>
+            <p class="lead">Тогда не теряй пользователя на оплате: сначала дай ему временный доступ через форму на главной, а уже потом веди к полноценной подписке.</p>
+            <a class="btn ghost" href="index.html#bridge">Открыть форму временного доступа</a>
+          </div>
+          <div class="brand-mark">PROTO</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div>
+        <div class="brand">FOTUR</div>
+        <p>© 2026 FOTUR. Monolith access interface.</p>
+      </div>
+      <div class="footer-nav">
+        <a href="index.html">Главная</a>
+        <a href="features.html">Возможности</a>
+        <a href="download.html">Скачать</a>
+        <a href="index.html#bridge">Временный доступ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

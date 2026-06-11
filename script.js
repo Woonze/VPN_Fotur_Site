@@ -1,39 +1,94 @@
-const $ = (s, p=document) => p.querySelector(s);
-const $$ = (s, p=document) => [...p.querySelectorAll(s)];
-const burger = $('.burger');
-const links = $('.nav__links');
-if (burger && links) burger.addEventListener('click', () => links.classList.toggle('open'));
-const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show') }), {threshold:.12});
-$$('.fade-up').forEach(el => io.observe(el));
-$$('[data-plan]').forEach(btn => btn.addEventListener('click', () => {
-  const plan = btn.dataset.plan;
-  localStorage.setItem('foturPlan', plan);
-  const select = $('#plan');
-  if(select) select.value = plan;
-  location.href = 'tariffs.html#order';
-}));
-const form = $('#orderForm');
-if(form){
-  const status = $('#formStatus');
-  const saved = localStorage.getItem('foturPlan');
-  if(saved && $('#plan')) $('#plan').value = saved;
-  form.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    const payload = Object.fromEntries(new FormData(form).entries());
-    status.textContent = 'Отправляем запрос на сервер FOTUR...';
-    try{
-      // Вставь сюда свой реальный endpoint API.
-      const API_URL = 'https://api.example.com/subscriptions/create';
-      // Для реального запуска раскомментируй fetch ниже и замени API_URL.
-      // const response = await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-      // const data = await response.json();
-      await new Promise(r=>setTimeout(r,700));
-      status.textContent = `Заявка принята. Тариф: ${payload.plan}. Подключи реальный API в script.js.`;
-      form.reset();
-    }catch(err){
-      status.textContent = 'Ошибка соединения с API. Проверь CORS и адрес сервера.';
+const $ = (selector, parent = document) => parent.querySelector(selector);
+const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+
+const burger = $(".burger");
+const links = $(".nav__links");
+
+if (burger && links) {
+  burger.addEventListener("click", () => links.classList.toggle("open"));
+  links.addEventListener("click", (event) => {
+    if (event.target.closest("a")) {
+      links.classList.remove("open");
     }
   });
 }
-const timer = $('#sessionTimer');
-if(timer){let sec=15153; setInterval(()=>{sec++; const h=String(Math.floor(sec/3600)).padStart(2,'0'),m=String(Math.floor(sec%3600/60)).padStart(2,'0'),s=String(sec%60).padStart(2,'0'); timer.textContent=`${h}:${m}:${s}`},1000)}
+
+const page = document.body.dataset.page;
+if (page) {
+  $(`[data-page="${page}"]`)?.classList.add("active");
+}
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  },
+  { threshold: 0.14 }
+);
+
+$$(".fade-up").forEach((element) => observer.observe(element));
+
+$$("[data-plan]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const plan = button.dataset.plan;
+    localStorage.setItem("foturPlan", plan);
+    const orderSelect = $("#plan");
+    if (orderSelect) {
+      orderSelect.value = plan;
+      document.querySelector("#order")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    location.href = "tariffs.html#order";
+  });
+});
+
+const savedPlan = localStorage.getItem("foturPlan");
+if (savedPlan && $("#plan")) {
+  $("#plan").value = savedPlan;
+}
+
+async function handleLeadForm(form) {
+  const status = form.querySelector("[data-status]");
+  const payload = Object.fromEntries(new FormData(form).entries());
+
+  if (status) {
+    status.textContent = "Шифруем запрос и готовим отправку...";
+  }
+
+  try {
+    // Подключи сюда свой endpoint, когда будет готов backend.
+    const API_URL = "https://api.example.com/fotur/intake";
+    void API_URL;
+    // Пример реальной отправки:
+    // await fetch(API_URL, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(payload),
+    // });
+    await new Promise((resolve) => setTimeout(resolve, 700));
+
+    const route = payload.plan || payload.issue || "custom";
+    if (status) {
+      status.textContent = `Запрос принят. Маршрут: ${route}. Подключи реальный API в script.js, чтобы форма стала боевой.`;
+    }
+
+    form.reset();
+    if ($("#plan") && savedPlan) {
+      $("#plan").value = savedPlan;
+    }
+  } catch (error) {
+    if (status) {
+      status.textContent = "Не удалось отправить запрос. Проверь endpoint, CORS и настройки backend.";
+    }
+  }
+}
+
+$$("[data-lead-form]").forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    handleLeadForm(form);
+  });
+});

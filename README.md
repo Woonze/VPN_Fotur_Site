@@ -1,21 +1,14 @@
-# FOTUR VPN Landing
+# FOTUR VPN Site
 
-Готовый статический сайт под GitHub Pages.
+Статический сайт FOTUR с общими стилями и простым JavaScript без сборщика.
 
-## Страницы
-- `index.html` — главная
-- `features.html` — возможности
-- `tariffs.html` — тарифы + форма заявки
-- `download.html` — скачать
-- `dashboard.html` — личный кабинет
+Файлы:
 
-## Как деплоить с телефона
-1. Создай репозиторий на GitHub.
-2. Нажми Add file → Upload files.
-3. Загрузи все файлы из архива.
-4. Settings → Pages → Deploy from branch → main → /root.
+- `index.html` — главная страница с формой временного доступа
+- `features.html` — страница возможностей
+- `tariffs.html` — тарифы и заявка на подключение
+- `download.html` — загрузки и инструкции
+- `style.css` — общий визуальный стиль
+- `script.js` — мобильное меню, анимации и обработка форм
 
-## API
-Форма находится в `tariffs.html`, логика в `script.js`.
-Замени `https://api.example.com/subscriptions/create` на реальный endpoint.
-На сервере нужно разрешить CORS для домена GitHub Pages или твоего домена.
+Формы пока работают через безопасную заглушку. Для боевой отправки подключи свой endpoint в `script.js`.
