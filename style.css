@@ -87,6 +87,21 @@ img{max-width:100%;display:block}
   text-shadow:var(--glow-cyan);
 }
 
+.nav .brand{
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+  font-size:20px;
+}
+
+.nav .brand-vpn{
+  color:#edf6fb;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-shadow:none;
+}
+
 .nav__links,
 .nav__actions{
   display:flex;
