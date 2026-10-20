@@ -100,7 +100,7 @@
 
       links.happ.href = `happ://add/${encode(config)}`;
       links.incy.href = `incy://add/${encode(config)}`;
-      links.hiddify.href = `hiddify://install-sub?url=${encode(config)}#FOTUR`;
+      links.hiddify.href = `hiddify://import/${config}`;
       document.getElementById("copy-link").addEventListener("click", async (event) => {
         event.preventDefault();
         try {
