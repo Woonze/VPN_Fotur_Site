@@ -22,6 +22,7 @@ FOTUR VPN — это быстрый и понятный способ получ�
 - Сайт: [Главная страница FOTUR](./)
 - Тариф: [Открыть тарифы](./tariffs/)
 - Загрузки: [Скачать приложение](./download/)
+- Подключение: [Открыть подписку в приложении](./connection/)
 - Купить подписку: [Перейти в Telegram-бота](https://t.me/foturvpnbot)
 - База знаний: [fotur.gitbook.io/fotur-vpn](https://fotur.gitbook.io/fotur-vpn)
 - Установка приложений: [Пошаговая инструкция](https://fotur.gitbook.io/fotur-vpn/ustanovka-prilozhenii)
