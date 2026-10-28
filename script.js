@@ -2,7 +2,6 @@ const $ = (selector, parent = document) => parent.querySelector(selector);
 const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
 
 const ALLOWED_EMAIL_DOMAINS = new Set(["gmail.com", "mail.ru", "yandex.ru"]);
-const FREE_ACCESS_STORAGE_KEY = "fotur-free-access-issued";
 const FOTUR_API_BASE_URL =
   window.FOTUR_API_BASE_URL ||
   document.body.dataset.apiBaseUrl ||
@@ -211,11 +210,6 @@ async function handleBridgeForm(form) {
     return;
   }
 
-  if (stage === "request" && localStorage.getItem(FREE_ACCESS_STORAGE_KEY)) {
-    status.textContent = "Для этого браузера временный доступ уже выдавался.";
-    return;
-  }
-
   try {
     submitButton.disabled = true;
 
@@ -282,7 +276,6 @@ async function handleBridgeForm(form) {
     status.textContent = data.message || "Не удалось обработать код.";
 
     if (response.ok && data.ok) {
-      localStorage.setItem(FREE_ACCESS_STORAGE_KEY, "1");
       form.reset();
       resetBridgeForm(form);
     } else {
