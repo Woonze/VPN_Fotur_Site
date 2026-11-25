@@ -77,7 +77,20 @@
   <script>
     (() => {
       const params = new URLSearchParams(window.location.search);
-      const config = params.get("config");
+      const normalizeSubscription = (value) => {
+        if (!value) return value;
+        try {
+          const url = new URL(value);
+          const match = url.pathname.match(/^(\/(?:[^/]+\/)+[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:\/auto)?\/?$/i);
+          if (url.protocol !== "https:" || url.hostname !== "vpn.fotur.tech" || !match) return value;
+          url.pathname = `${match[1]}/auto/`;
+          url.hash = "";
+          return url.toString();
+        } catch {
+          return value;
+        }
+      };
+      const config = normalizeSubscription(params.get("config"));
       const statusLine = document.getElementById("status-line");
       const status = document.getElementById("status");
       const missing = document.getElementById("missing");
